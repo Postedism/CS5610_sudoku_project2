@@ -700,3 +700,23 @@ html, body, #root {
   border-radius: 8px; /* 圆角 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 柔和的阴影 */
 }
+/* --- 单元格高亮样式 (Cell Highlight Styles) --- */
+
+/* 确保这个规则存在！*/
+.sudoku-cell.cell-selected {
+  background-color: #e7f3ff; /* 浅蓝色 */
+  border: 2px solid #3498db; /* 深蓝色边框 */
+  
+  /* 这可以防止边框导致布局跳动
+    (如果你的边框是 1px, 2px - 1px = 1px) 
+  */
+  margin: -1px; 
+}
+
+/* 提示的样式 (你已经有了，放在一起以确保完整) */
+.sudoku-cell.cell-hinted {
+  background-color: #dff0d8; /* 浅绿色 */
+  border: 2px solid #3c763d; /* 深绿色 */
+  color: #3c763d;
+  margin: -1px;
+}
