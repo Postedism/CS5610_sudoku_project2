@@ -1,7 +1,7 @@
 // src/contexts/SudokuContext.jsx
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { getPuzzle } from '../data/puzzles';
+import { getPuzzle } from '../data/generator';
 import { findNakedSingle } from '../utils/validation'; 
 
 // 辅助函数：检查胜利
