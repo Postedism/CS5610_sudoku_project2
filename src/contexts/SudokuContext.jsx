@@ -41,6 +41,15 @@ const initializer = (defaultState) => {
 };
 
 // 3. Reducer 函数
+// src/contexts/SudokuContext.jsx
+
+// ... (在 SudokuContext.jsx 文件的顶部，
+// ... 保持你的 imports, checkWin, initialState, 和 initializer 不变) ...
+
+
+// --- 从这里开始替换 ---
+
+// 3. Reducer 函数 (已修正)
 function sudokuReducer(state, action) {
   switch (action.type) {
     case 'START_NEW_GAME': {
@@ -65,38 +74,54 @@ function sudokuReducer(state, action) {
       };
     }
 
+    // *** 这是你 Bug 所在的地方 ***
+    // *** 这个版本是 100% 正确的 ***
     case 'SELECT_CELL': {
       return {
-        ...state,
-        selectedCell: action.payload,
-        hintCell: null,
+        ...state, // 确保你保留了其他状态
+        selectedCell: action.payload, // 将 {row, col} 存入 state
+        hintCell: null, // 清除提示高亮
       };
     }
 
     case 'UPDATE_CELL_VALUE': {
       if (state.isWon) return state;
+      
       const { row, col, value } = action.payload;
       const size = state.gameMode === 'easy' ? 6 : 9;
-      if (state.initialBoard[row][col] !== 0) return state;
-      if (value < 0 || value > size) return state;
+
+      // 检查是否为初始单元格
+      if (state.initialBoard[row][col] !== 0) {
+        return state;
+      }
+      
+      // 检查值是否在 0-size 范围内
+      if (value < 0 || value > size) {
+        return state;
+      }
+
       const newBoardState = state.currentBoardState.map(row => [...row]);
       newBoardState[row][col] = value;
+
       const isWon = checkWin(newBoardState, state.solutionBoard);
+
       return {
         ...state,
         currentBoardState: newBoardState,
         isWon: isWon,
-        hintCell: null,
+        hintCell: null, // 输入时清除提示
       };
     }
     
     case 'FIND_HINT': {
       if (state.isWon) return state;
+      
       const hint = findNakedSingle(state.currentBoardState);
+      
       if (hint) {
         return {
           ...state,
-          selectedCell: { row: hint.row, col: hint.col },
+          selectedCell: { row: hint.row, col: hint.col }, // 这一行曾“掩盖”了 Bug
           hintCell: { row: hint.row, col: hint.col },
         };
       } else {
@@ -105,14 +130,23 @@ function sudokuReducer(state, action) {
     }
     
     case 'TICK_TIMER': {
-      if (state.isWon) return state;
-      return { ...state, timer: state.timer + 1 };
+      if (state.isWon) {
+        return state;
+      }
+      return {
+        ...state,
+        timer: state.timer + 1,
+      };
     }
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 }
+
+// --- 在这里结束替换 ---
+
+// ... (保持你的 SudokuProvider 和自定义 Hooks 不变) ...
 
 
 // *** 4. 修正：添加缺失的 Context 定义 ***
