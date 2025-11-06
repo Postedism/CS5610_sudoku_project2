@@ -25,7 +25,7 @@ function RulesPage() {
         </p>
       </section>
 
-      <section className="credits-section">707
+      <section className="credits-section">
         <h3>Credits (staff)</h3>
         <p>This program completed by JunruiDuan。</p>
         <div className="credit-links">
