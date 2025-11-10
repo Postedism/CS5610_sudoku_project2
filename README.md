@@ -5,6 +5,7 @@ A dynamic Sudoku game built with React, Context API, and a backtracking algorith
 ### Links
 * **Live URL (Deployed on Render):** https://cs5610-sudoku-project2.onrender.com
 * **GitHub Repository:** https://github.com/Postedism/CS5610_sudoku_project2
+* **Youtube URL:** https://youtu.be/1NzK1EhOvcw
 
 ---
 
