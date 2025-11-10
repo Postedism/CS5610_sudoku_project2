@@ -27,9 +27,9 @@ function RulesPage() {
 
       <section className="credits-section">
         <h3>Credits (staff)</h3>
-        <p>This program completed by JunruiDuan。</p>
+        <p>This program completed by JunruiDuan and Xiaomeng Li。</p>
         <div className="credit-links">
-          <a 
+          <a  
             href="https://github.com/Postedism" 
             target="_blank" 
             rel="noopener noreferrer"
